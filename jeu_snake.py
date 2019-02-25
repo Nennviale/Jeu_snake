@@ -14,7 +14,7 @@ def trouve_personnage(plateau):
         j = 0
         for case in ligne:
             if case == True:
-                print(f"le personnage est a la case ({i}, {j})")
+                print(f"({i}, {j})")
                 return [i, j]
             else:
                 j = j + 1
