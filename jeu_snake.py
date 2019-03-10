@@ -1,10 +1,18 @@
-def print_state(matrice):
+import random
+def print_state(matrice, x, y):
+    print(f"La pomme se trouve en ({x}, {y})")
+    i = 0
     for sousliste in matrice:
+        j = 0
         for element in sousliste:
             if element == True:
                 print('1', end='')
+            elif x == i and y == j: 
+                print ('P', end= '')
             else:
                 print('-', end='')
+            j = j+1
+        i = i+1
         print ('')
     return 
 
@@ -22,6 +30,21 @@ def trouve_personnage(plateau):
     
     return
 
+def pomme_sur_personnage(plateau, x, y):
+    i = 0
+    for ligne in plateau:
+        j = 0
+        for case in ligne:
+            if case == True and x==i and y ==j:    
+                print (' La pomme est sur le personnage')
+
+                return True
+            else:
+                j = j + 1
+        i = i + 1
+    
+    return False
+
 def move_personnage_droite(plateau):
     i, j = trouve_personnage(plateau)
 
@@ -34,7 +57,6 @@ def move_personnage_droite(plateau):
 
     ligne[j] = False
 
-    print_state(plateau)
 
     return plateau
 
@@ -50,7 +72,6 @@ def move_personnage_gauche(plateau):
 
     ligne[j] = False
 
-    print_state(plateau)
 
     return plateau
 
@@ -65,7 +86,7 @@ def move_personnage_haut(plateau):
 
     plateau[i][j] = False
 
-    print_state(plateau)
+
 
     return plateau
 
@@ -79,7 +100,6 @@ def move_personnage_bas(plateau):
 
     plateau[i][j] = False
 
-    print_state(plateau)
 
     return plateau
 
@@ -95,18 +115,23 @@ state =[
     [False, False, False, False, False, False, False, False, ],
     [False, False, False, False, False, False, False, False, ],
 ]
-print_state(state)
 
 from kbhit import KBHit
 kb = KBHit()
 
 print('Hit any key, or ESC to exit')
+x = 0
+y = 0
 
 while True:
 
+
     if kb.kbhit():
+        if pomme_sur_personnage(state, x, y): 
+            x = random.randint(0, 9)
+            y = random.randint(0, 7)
         # Affiche le plateau
-        print_state(state)
+        print_state(state,x ,y)   
 
         # Recupere la touche enfoncee
         c = kb.getch()
@@ -129,5 +154,6 @@ while True:
         if c_ord == 115: # s
             print("bas")
             move_personnage_bas(state)
-
+        # Affiche le plateau
+        print_state(state,x ,y) 
 kb.set_normal_term()
