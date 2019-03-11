@@ -16,6 +16,7 @@ def print_state(matrice, x, y):
         print ('')
     return 
 
+
 def trouve_personnage(plateau):
     i = 0
     for ligne in plateau:
@@ -122,6 +123,11 @@ kb = KBHit()
 print('Hit any key, or ESC to exit')
 x = 0
 y = 0
+
+import time
+ 
+# Wait for 5 seconds
+time.sleep(5)
 
 while True:
 
