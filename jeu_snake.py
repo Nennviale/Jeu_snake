@@ -124,10 +124,6 @@ print('Hit any key, or ESC to exit')
 x = 0
 y = 0
 
-import time
- 
-# Wait for 5 seconds
-time.sleep(5)
 
 while True:
 
